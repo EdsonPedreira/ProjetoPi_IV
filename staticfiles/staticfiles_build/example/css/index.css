@@ -1,0 +1,125 @@
+body {
+    background-color: white; /* Fundo branco */
+    color: green;
+    max-width: 1200px;
+    font-family: 'Roboto', sans-serif; /* Correção da fonte */
+    margin: 0 auto;
+    padding: 15px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Alinhamento dos itens do header */
+}
+
+#title {
+    display: flex; /* Para alinhar os itens em coluna */
+    flex-direction: column;
+    line-height: 10px;
+}
+
+li {
+    display: inline-block;
+    margin: 20px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: white;
+    transition: 0.3s all;
+}
+
+h1 {
+    font-weight: 200;
+}
+
+#login {
+    border: 2px solid rgb(132, 14, 201);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#login:hover {
+    background-color: black; /* Corrigindo a propriedade */
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: row; /* Certifique-se de que é row para itens lado a lado */
+    justify-content: center; /* Centralizando o main */
+    margin-top: 50px;
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha se não houver espaço suficiente */
+}
+
+.donation-info { /* Certifique-se de que os divs que você quer alinhar têm essa classe */
+    flex: 1; /* Isso faz com que cada seção ocupe o mesmo espaço */
+    margin: 10px; /* Margem entre os divs */
+    padding: 20px;
+    border: 1px solid #ccc; /* Borda para visualização */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar um efeito de profundidade */
+    box-sizing: border-box; /* Inclui padding e borda na largura total */
+}
+
+h2 {
+    font-size: 56px;
+    line-height: 10px;
+    font-family: 'Roboto', sans-serif; /* Correção da fonte */
+    padding: 15px; /* Adicionando padding */
+    border-radius: 20px; /* Cantos arredondados */
+    background-color: lightgreen; /* Mudança para verde claro */
+}
+
+span {
+    color: yellow;
+}
+
+p {
+    line-height: 20px;
+    max-width: 500px;
+    font-family: 'Roboto', sans-serif; /* Correção da fonte */
+}
+
+img {
+    width: 500px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+form [type="submit"] {
+    height: 35px;
+    width: 50%;
+    background-color: green;
+    color: black;
+    font-weight: bold;
+}
+
+form [type="submit"]:hover {
+    cursor: pointer;
+}
+
+input {
+    margin-top: 20px;
+    height: 50%;
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+/* Adicione este código ao seu arquivo styles.css */
+.chart-container {
+    width: 700px; /* Altere este valor para o tamanho fixo desejado */
+    margin: 20px auto; /* Centraliza o gráfico na página */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

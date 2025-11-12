@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Adicionar Doação{% endblock %}
+
+{% block extra_head %}
+    <style>
+        .form-group {
+            display: none;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Adicionar Doação</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card p-4 shadow-sm rounded-4">
+                <form action="{% url 'adicionar_doacao' %}" method="POST" id="doacaoForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label">Tipo de Doação:</label>
+                        <select name="tipo" id="tipo" class="form-select" required onchange="toggleFields()">
+                            <option value="">Selecione...</option>
+                            <option value="vestuario">Vestuário</option>
+                            <option value="eletrodomestico">Eletrodoméstico</option>
+                            <option value="alimento">Alimento</option>
+                        </select>
+                    </div>
+
+                    <div id="vestuarioFields" class="form-group mb-3">
+                        <label for="vestuario" class="form-label">Vestuário:</label>
+                        <select name="vestuario" id="vestuario" class="form-select">
+                            {% for vestuario in vestuarios %}
+                                <option value="{{ vestuario.id }}">{{ vestuario }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="tamanho" class="form-label mt-3">Tamanho:</label>
+                        <select name="tamanho" id="tamanho" class="form-select">
+                            {% for tamanho in tamanhos %}
+                                <option value="{{ tamanho.id }}">{{ tamanho }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="genero" class="form-label mt-3">Gênero:</label>
+                        <select name="genero" id="genero" class="form-select">
+                            {% for genero in generos %}
+                                <option value="{{ genero.id }}">{{ genero }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div id="eletrodomesticoFields" class="form-group mb-3">
+                        <label for="eletrodomestico" class="form-label">Eletrodoméstico:</label>
+                        <select name="eletrodomestico" id="eletrodomestico" class="form-select">
+                            {% for eletrodomestico in eletrodomesticos %}
+                                <option value="{{ eletrodomestico.id }}">{{ eletrodomestico }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div id="alimentoFields" class="form-group mb-3">
+                        <label for="alimento" class="form-label">Alimento:</label>
+                        <select name="alimento" id="alimento" class="form-select">
+                            {% for alimento in alimentos %}
+                                <option value="{{ alimento.id }}">{{ alimento }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade:</label>
+                        <input type="number" id="quantidade" name="quantidade" class="form-control" required min="1">
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg mt-3">Adicionar Doação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up para confirmação de doação -->
+    {% if doacao_realizada %}
+    <div class="overlay"></div>
+    <div class="popup card p-4">
+        <p class="mb-3 fs-5">Obrigado! Você doou <strong>{{ quantidade }}</strong> itens.</p>
+        <button onclick="window.location.href='{% url 'index' %}'" class="btn btn-success">Voltar</button>
+    </div>
+    {% endif %}
+
+    <script>
+        function toggleFields() {
+            document.getElementById('vestuarioFields').style.display = 'none';
+            document.getElementById('eletrodomesticoFields').style.display = 'none';
+            document.getElementById('alimentoFields').style.display = 'none';
+
+            var tipo = document.getElementById('tipo').value;
+            if (tipo === 'vestuario') {
+                document.getElementById('vestuarioFields').style.display = 'block';
+            } else if (tipo === 'eletrodomestico') {
+                document.getElementById('eletrodomesticoFields').style.display = 'block';
+            } else if (tipo === 'alimento') {
+                document.getElementById('alimentoFields').style.display = 'block';
+            }
+        }
+    </script>
+{% endblock %}

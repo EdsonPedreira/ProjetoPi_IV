@@ -1,0 +1,24 @@
+@media screen and (max-width: 760px) {
+    header {
+        flex-direction: column; /* Correção da palavra 'colum' para 'column' */
+    }
+    main {
+        flex-direction: column; /* Correção da palavra 'colum' para 'column' */
+    }
+    h2 {
+        font-size: 38px;
+    }
+    form {
+        margin: 0 auto;
+        width: 100%;
+    }
+    input {
+        align-self: center;
+    }
+    img {
+        display: none; /* Esconde a imagem em telas menores */
+    }
+    ul {
+        text-align: center; /* Centraliza o texto na lista */
+    }
+}

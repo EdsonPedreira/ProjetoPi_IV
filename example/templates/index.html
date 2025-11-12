@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="text-center mb-5">Dados de Doação</h1>
+<div class="row g-4 justify-content-center">
+    <!-- Card de Vestuário -->
+    <div class="col-sm-10 col-md-6 col-lg-4">
+        <section class="card text-center h-100 p-3 shadow-sm border-0 rounded-4">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <h2 class="card-title display-4 fw-bold text-primary">{{ soma_quantidade }}</h2>
+                <p class="card-text fw-semibold">Roupas doadas até o momento</p>
+                <p class="card-text text-muted">Para contribuir, você pode ir até um de nossos pontos de coleta.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Card de Eletrodomésticos -->
+    <div class="col-sm-10 col-md-6 col-lg-4">
+        <section class="card text-center h-100 p-3 shadow-sm border-0 rounded-4">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <h2 class="card-title display-4 fw-bold text-primary">{{ soma_quantidade_eletrodomestico }}</h2>
+                <p class="card-text fw-semibold">Eletrodomésticos doados até o momento</p>
+                <p class="card-text text-muted">Para contribuir, você pode ir até um de nossos pontos de coleta.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Card de Alimentos -->
+    <div class="col-sm-10 col-md-6 col-lg-4">
+        <section class="card text-center h-100 p-3 shadow-sm border-0 rounded-4">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <h2 class="card-title display-4 fw-bold text-primary">{{ soma_quantidade_alimento }}</h2>
+                <p class="card-text fw-semibold">Alimentos doados até o momento</p>
+                <p class="card-text text-muted">Para contribuir, você pode ir até um de nossos pontos de coleta.</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="text-center my-5">
+    <a href="{% url 'adicionar_doacao' %}" class="btn btn-lg btn-success rounded-pill px-5 py-3 fw-bold shadow-sm">
+        Clique aqui para doar
+    </a>
+    <a href="{% url 'grafico' %}" class="btn btn-lg btn-info text-white rounded-pill px-5 py-3 fw-bold shadow-sm">
+        Ver Gráfico
+    </a>
+</div>
+{% endblock %}

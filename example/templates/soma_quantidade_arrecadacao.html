@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'Index/css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Index/css/media_index.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>UNIDOE</title>
+</head>
+
+<body>
+    <header>
+        <div id="title">
+            <h1>Campanha do</h1>
+            <h1>Agasalho</h1>
+        </div>
+        <nav>
+            <ul>
+                <a href="#"><li>Quem somos</li></a>
+                <a href="#"><li>Objetivos</li></a>
+                <a href="#"><li>Pontos de doação</li></a>
+                <a href="#"><li>Desenvolvedores</li></a>
+                <a href="#"><li>Doar</li></a>
+                <a href="#" id="login"><li>Login</li></a>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside>
+            <h1>Sua ajuda pode</h1>
+            <h1>Aquecer alguém</h1>
+            <p>Os alunos da UNIVESP ajudaram a arrecadar</p>
+            <h2><span>{{ soma_quantidade }}</span></h2>
+            <p>peças de vestuário, obrigado pela sua ajuda</p>
+            <form>
+                <input type="submit" value="Doar">
+            </form>
+        </aside>
+        <article>
+            <img src="{% static 'Index/img/Pedreira-SP.png' %}" alt="Pedreira">
+        </article>
+    </main>
+   </body>
+</html>

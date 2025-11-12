@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Doações</title>
+
+    <!-- Link para o CSS do Bootstrap para estilização básica da página -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Estilo personalizado para o gráfico em tela cheia -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .full-screen-container {
+            flex-grow: 1; /* Permite que o contêiner se expanda para preencher o espaço disponível */
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+    </style>
+
+    <!-- Biblioteca Chart.js para a renderização do gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="full-screen-container">
+        <canvas id="donationLineChart"></canvas>
+    </div>
+
+    <div class="text-center my-5">
+        <a href="{% url 'index' %}" class="btn btn-lg btn-success rounded-pill px-5 py-3 fw-bold shadow-sm">
+            Voltar para a página inicial
+        </a>
+    </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Dados do Django, passados para o JavaScript
+        const dates = JSON.parse('{{ dates_json|safe }}');
+        const vestuarioData = JSON.parse('{{ vestuario_data_json|safe }}');
+        const eletroData = JSON.parse('{{ eletro_data_json|safe }}');
+        const alimentoData = JSON.parse('{{ alimento_data_json|safe }}');
+        const previsaoVestuarioData = JSON.parse('{{ previsao_vestuario_data_json|safe }}');
+        const previsaoEletroData = JSON.parse('{{ previsao_eletro_data_json|safe }}');
+        const previsaoAlimentoData = JSON.parse('{{ previsao_alimento_data_json|safe }}');
+
+        const ctx = document.getElementById('donationLineChart').getContext('2d');
+        const donationChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Vestuário (Histórico)',
+                    data: vestuarioData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Eletrodomésticos (Histórico)',
+                    data: eletroData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Alimentos (Histórico)',
+                    data: alimentoData,
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Previsão de Vestuário',
+                    data: previsaoVestuarioData,
+                    borderColor: 'rgba(255, 99, 132, 0.6)',
+                    borderDash: [5, 5],
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Previsão de Eletrodomésticos',
+                    data: previsaoEletroData,
+                    borderColor: 'rgba(54, 162, 235, 0.6)',
+                    borderDash: [5, 5],
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.1
+                }, {
+                    label: 'Previsão de Alimentos',
+                    data: previsaoAlimentoData,
+                    borderColor: 'rgba(255, 206, 86, 0.6)',
+                    borderDash: [5, 5],
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Permite que o gráfico use a altura total
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Evolução das Doações por Data'
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Data'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Quantidade de Doações'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
